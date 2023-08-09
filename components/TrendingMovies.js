@@ -8,6 +8,7 @@ import {
 import React from "react";
 import Carousel from "react-native-snap-carousel";
 import { useNavigation } from "@react-navigation/native";
+import { image500 } from "../api/movieDB";
 
 var { width, height } = Dimensions.get("window");
 
@@ -24,7 +25,7 @@ export default function TrendingMovies({ data }) {
       <Carousel
         data={data}
         renderItem={({ item }) => (
-          <MovieCard {...item} handleClick={handleClick} />
+          <MovieCard item={item} handleClick={handleClick} />
         )}
         firstItem={1}
         inactiveSlideOpacity={0.6}
@@ -40,7 +41,7 @@ const MovieCard = ({ item, handleClick }) => {
   return (
     <TouchableWithoutFeedback onPress={() => handleClick(item)}>
       <Image
-        source={require("../assets/img/AgeProof.png")}
+        source={{ uri: image500(item.poster_path) }}
         style={{ width: width * 0.6, height: height * 0.4 }}
         className="rounded-3xl"
       />
